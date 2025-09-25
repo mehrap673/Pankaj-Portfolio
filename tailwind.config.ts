@@ -18,6 +18,12 @@ module.exports = {
           '"Noto Color Emoji"',
         ],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-radial-at-center': 'radial-gradient(circle at center, var(--tw-gradient-stops))',
+        'gradient-radial-at-top': 'radial-gradient(circle at top, var(--tw-gradient-stops))',
+        'gradient-radial-at-bottom': 'radial-gradient(circle at bottom, var(--tw-gradient-stops))',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
