@@ -50,7 +50,7 @@ export const ModernHeader = (): JSX.Element => {
               className="flex items-center space-x-3 group"
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-white font-bold text-lg">JP</span>
+                <span className="text-white font-bold text-lg">PM</span>
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">
                 Portfolio

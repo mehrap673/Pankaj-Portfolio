@@ -40,7 +40,7 @@ export const Footer = (): JSX.Element => {
   };
 
   return (
-    <footer className="relative py-16 px-6 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-200/50 dark:border-gray-700/50">
+    <footer className="relative py-16 px-6 bg-gray-100/90 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-200/50 dark:border-gray-700/50">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand/Logo Section */}

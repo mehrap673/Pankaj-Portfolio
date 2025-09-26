@@ -100,7 +100,7 @@ export const ModernProjects = (): JSX.Element => {
         </div>
 
         {/* Featured Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           {featuredProjects.map((project, index) => (
             <Card 
               key={project.id} 
@@ -161,53 +161,6 @@ export const ModernProjects = (): JSX.Element => {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Other Projects */}
-        <div className="animate-fade-up" style={{ animationDelay: '0.6s' }}>
-          <h3 className="text-heading-5 mb-8 text-center">More Projects</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {otherProjects.map((project, index) => (
-              <Card 
-                key={project.id}
-                className="group glass-card hover:glass-dark transition-all duration-300 cursor-pointer"
-                onClick={() => openProjectModal(project)}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-16 h-16 rounded-lg object-cover"
-                    />
-                    <div className="flex-1">
-                      <h4 className="font-semibold mb-2 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {project.technologies.slice(0, 3).map((tech) => (
-                          <Badge key={tech} variant="outline" className="text-xs">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* View All Button */}
-        <div className="text-center mt-12 animate-fade-up" style={{ animationDelay: '0.8s' }}>
-          <Button variant="outline" className="glass-card hover:glass-dark animate-magnetic px-8 py-3">
-            View All Projects
-            <ExternalLinkIcon className="w-4 h-4 ml-2" />
-          </Button>
         </div>
       </div>
 

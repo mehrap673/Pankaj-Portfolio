@@ -5,15 +5,17 @@
 @layer base {
   :root {
     /* Neon Noir Palette - Light Mode */
-    --primary: 265 85% 60%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 190 95% 62%;
-    --accent-foreground: 240 6% 6%;
-    --surface: 0 0% 100%;
-    --surface-foreground: 240 6% 6%;
-    --surface-elevated: 0 0% 98%;
-    --surface-muted: 240 6% 96%;
-    --surface-subtle: 240 6% 92%;
+/* Neon Noir Palette - Light Mode (Soft Backgrounds) */
+--surface: 20 30% 98%;          /* Very soft light lavender-white */
+--surface-elevated: 240 20% 95%; /* Slightly darker card/background */
+--surface-muted: 240 15% 92%;    /* Muted soft lavender */
+--surface-subtle: 240 10% 90%;   /* Subtle background layers */
+--primary: 265 85% 60%;          /* Keep original accent for elements */
+--primary-foreground: 0 0% 20%;  
+--accent: 190 95% 62%;           
+--accent-foreground: 240 6% 10%; 
+--surface-foreground: 240 6% 15%; 
+
     
     /* Semantic Colors */
     --background: var(--surface);

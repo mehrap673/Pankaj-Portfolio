@@ -1,0 +1,190 @@
+/* Hero Section Styles */
+
+/* Background Gradients */
+.bg-gradient-hero {
+  background: linear-gradient(135deg, 
+    hsl(var(--background)) 0%, 
+    hsl(var(--muted) / 0.3) 50%, 
+    hsl(var(--background)) 100%
+  );
+}
+
+/* Typography */
+.text-heading-1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Glass Morphism Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.glass-dark:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Background Blob Animation */
+.hero-blob {
+  position: absolute;
+  background: linear-gradient(45deg, 
+    rgba(147, 51, 234, 0.1),
+    rgba(59, 130, 246, 0.1),
+    rgba(6, 182, 212, 0.1)
+  );
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+/* Button Styles */
+.btn-magnetic {
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-magnetic:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+}
+
+.btn-magnetic:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-magnetic:hover:before {
+  left: 100%;
+}
+
+/* Animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes magnetic {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes morph {
+  0%, 100% {
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  }
+  25% {
+    clip-path: polygon(58% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%, 42% 0%);
+  }
+  50% {
+    clip-path: polygon(25% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 75%, 75% 0%);
+  }
+  75% {
+    clip-path: polygon(40% 0%, 100% 60%, 60% 100%, 40% 100%, 0% 40%, 60% 0%);
+  }
+}
+
+/* Animation Classes */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s ease-out;
+}
+
+.animate-blur-in {
+  animation: blur-in 1.2s ease-out;
+}
+
+.animate-magnetic:hover {
+  animation: magnetic 0.6s ease-in-out infinite;
+}
+
+.animate-morph {
+  animation: morph 8s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .text-heading-1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+  
+  .hero-blob {
+    display: none;
+  }
+  
+  .glass-card {
+    backdrop-filter: blur(5px);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-dark:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

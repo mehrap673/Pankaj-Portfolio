@@ -27,16 +27,6 @@ export const Skills = (): JSX.Element => {
       ]
     },
     {
-      title: "Cloud & DevOps",
-      icon: <CloudIcon className="w-6 h-6" />,
-      skills: [
-        { name: "AWS", level: 82, color: "bg-orange-500" },
-        { name: "Docker", level: 85, color: "bg-blue-800" },
-        { name: "Kubernetes", level: 75, color: "bg-purple-600" },
-        { name: "CI/CD", level: 80, color: "bg-gray-600" }
-      ]
-    },
-    {
       title: "Design & UI/UX",
       icon: <PaletteIcon className="w-6 h-6" />,
       skills: [
@@ -66,7 +56,7 @@ export const Skills = (): JSX.Element => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {skillCategories.map((category, index) => (
             <Card key={index} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6">

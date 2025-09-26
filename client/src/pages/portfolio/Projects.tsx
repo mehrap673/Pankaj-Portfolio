@@ -49,7 +49,7 @@ export const Projects = (): JSX.Element => {
   ];
 
   return (
-    <section id="projects" className="py-16 px-6">
+    <section id="projects" className="py-16 px-6 bg-gray">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">

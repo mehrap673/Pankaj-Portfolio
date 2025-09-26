@@ -3,9 +3,12 @@ import { ModernHeader } from "./portfolio/ModernHeader";
 import { ModernHero } from "./portfolio/ModernHero";
 import { ModernProjects } from "./portfolio/ModernProjects";
 import { ModernContact } from "./portfolio/ModernContact";
-import { About } from "./portfolio/About";
 import { Skills } from "./portfolio/Skills";
 import { Footer } from "./portfolio/Footer";
+import { Education } from "./portfolio/Education";
+import { Certificates } from "./portfolio/Certificates";
+import { Achievements } from "./portfolio/Achievements";
+import { AboutSection } from "./sections/AboutSection";
 
 export const PortfolioPage = (): JSX.Element => {
   return (
@@ -13,8 +16,9 @@ export const PortfolioPage = (): JSX.Element => {
       <ModernHeader />
       <ModernHero />
       <ModernProjects />
-      <About />
+      <Education />
       <Skills />
+      <Certificates />
       <ModernContact />
       <Footer />
     </div>
