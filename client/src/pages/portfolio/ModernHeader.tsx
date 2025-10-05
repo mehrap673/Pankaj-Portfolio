@@ -31,6 +31,9 @@ export const ModernHeader = (): JSX.Element => {
   const navigationItems = [
     { label: "Home", action: scrollToTop },
     { label: "Projects", action: () => scrollToSection('projects') },
+    { label: "Education", action: () => scrollToSection('education') },
+    { label : "Skills", action: () => scrollToSection('skills') },
+    { label: "Certificates", action: () => scrollToSection('certificates') },
     { label: "About", action: () => scrollToSection('about') },
     { label: "Contact", action: () => scrollToSection('contact') }
   ];
@@ -73,15 +76,7 @@ export const ModernHeader = (): JSX.Element => {
 
             {/* Right Side Actions */}
             <div className="flex items-center space-x-4">
-              {/* Theme Toggle */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="w-10 h-10 rounded-full glass-card hover:glass-dark animate-magnetic"
-              >
-                {theme === 'dark' ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-              </Button>
+              
               
               {/* CTA Button */}
               <Button 

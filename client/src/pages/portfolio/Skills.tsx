@@ -1,121 +1,171 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CodeIcon, PaletteIcon, DatabaseIcon, CloudIcon, SmartphoneIcon, WrenchIcon } from "lucide-react";
+import {
+  CodeIcon,
+  PaletteIcon,
+  DatabaseIcon,
+  WrenchIcon
+} from "lucide-react";
+
+interface Skill {
+  name: string;
+  level: number;
+  color: string;
+}
+
+interface SkillCategory {
+  title: string;
+  icon: React.ReactNode;
+  skills: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    title: "Frontend Development",
+    icon: <CodeIcon className="w-7 h-7" />,
+    skills: [
+      { name: "React", level: 85, color: "bg-blue-500" },
+      { name: "Next.js", level: 60, color: "bg-blue-600" },
+      { name: "TypeScript", level: 70, color: "bg-blue-600" },
+      { name: "TailwindCSS", level: 92, color: "bg-cyan-500" }
+    ]
+  },
+  {
+    title: "Backend Development",
+    icon: <DatabaseIcon className="w-7 h-7" />,
+    skills: [
+      { name: "Node.js", level: 75, color: "bg-green-600" },
+      { name: "Python/Django", level: 50, color: "bg-yellow-600" },
+      { name: "PostgreSQL", level: 60, color: "bg-blue-700" },
+      { name: "MongoDB", level: 80, color: "bg-green-700" }
+    ]
+  },
+  {
+    title: "Design & UI/UX",
+    icon: <PaletteIcon className="w-7 h-7" />,
+    skills: [
+      { name: "Figma", level: 80, color: "bg-purple-500" },
+      { name: "Adobe Creative Suite", level: 80, color: "bg-red-600" },
+      { name: "Prototyping", level: 88, color: "bg-pink-500" },
+      { name: "User Research", level: 80, color: "bg-indigo-500" }
+    ]
+  }
+];
+
+const additionalSkills = [
+  "JavaScript",
+  "Python",
+  "REST APIs",
+  "Git",
+  "GitHub",
+  "CSS",
+  "HTML5"
+];
+
+// Intersection observer hook
+const useInView = (options?: IntersectionObserverInit) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      options ?? { threshold: 0.2 }
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [ref, options]);
+
+  return { ref, isInView };
+};
 
 export const Skills = (): JSX.Element => {
-  const skillCategories = [
-    {
-      title: "Frontend Development",
-      icon: <CodeIcon className="w-6 h-6" />,
-      skills: [
-        { name: "React/Next.js", level: 95, color: "bg-blue-500" },
-        { name: "TypeScript", level: 90, color: "bg-blue-600" },
-        { name: "Vue.js", level: 85, color: "bg-green-500" },
-        { name: "TailwindCSS", level: 92, color: "bg-cyan-500" }
-      ]
-    },
-    {
-      title: "Backend Development",
-      icon: <DatabaseIcon className="w-6 h-6" />,
-      skills: [
-        { name: "Node.js", level: 88, color: "bg-green-600" },
-        { name: "Python/Django", level: 85, color: "bg-yellow-600" },
-        { name: "PostgreSQL", level: 87, color: "bg-blue-700" },
-        { name: "MongoDB", level: 80, color: "bg-green-700" }
-      ]
-    },
-    {
-      title: "Design & UI/UX",
-      icon: <PaletteIcon className="w-6 h-6" />,
-      skills: [
-        { name: "Figma", level: 90, color: "bg-purple-500" },
-        { name: "Adobe Creative Suite", level: 85, color: "bg-red-600" },
-        { name: "Prototyping", level: 88, color: "bg-pink-500" },
-        { name: "User Research", level: 80, color: "bg-indigo-500" }
-      ]
-    }
-  ];
-
-  const additionalSkills = [
-    "JavaScript", "Python", "Java", "Go", "GraphQL", "REST APIs", 
-    "Redis", "Elasticsearch", "Microservices", "Agile/Scrum", 
-    "Git", "Testing/TDD", "WebSockets", "Progressive Web Apps"
-  ];
-
   return (
-    <section id="skills" className="py-16 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <section
+      id="skills"
+      className="py-16 px-6"
+    >
+      <div className="max-w-7xl mx-auto text-white">
+        <header className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold tracking-tight drop-shadow-md">
             Skills & Expertise
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A comprehensive overview of my technical skills and proficiency levels.
+          <p className="mt-2 text-lg text-gray-400 max-w-xl mx-auto">
+            A snapshot of my technical proficiency levels and tools.
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {skillCategories.map((category, index) => (
-            <Card key={index} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white">
-                    {category.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    {category.title}
-                  </h3>
-                </div>
-
-                <div className="space-y-4">
-                  {category.skills.map((skill, idx) => (
-                    <div key={idx} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          {skill.name}
-                        </span>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <div className="relative">
-                        <Progress value={skill.level} className="h-2" />
-                        <div 
-                          className={`absolute top-0 left-0 h-2 rounded-full transition-all duration-1000 ${skill.color}`}
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
+        <div className="flex flex-col lg:flex-row lg:space-x-8 space-y-8 lg:space-y-0">
+          {skillCategories.map((category, i) => {
+            const { ref, isInView } = useInView({ threshold: 0.3 });
+            return (
+              <Card
+                key={i}
+                ref={ref}
+                className={`bg-white/10 dark:bg-gray-900/30 backdrop-blur-md border border-gray-700 shadow-lg flex-1 transition-all duration-1000 ease-in-out transform ${
+                  isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${i * 300}ms` }}
+              >
+                <CardContent className="p-7 flex flex-col">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-2xl flex items-center justify-center">
+                      {category.icon}
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                    <h3 className="text-2xl font-semibold">{category.title}</h3>
+                  </div>
+                  <div className="space-y-6">
+                    {category.skills.map((skill, idx) => {
+                      const { ref: skillRef, isInView: barInView } = useInView({ threshold: 0.5 });
+                      return (
+                        <div key={idx} ref={skillRef} className="space-y-1">
+                          <div className="flex justify-between font-semibold">
+                            <span>{skill.name}</span>
+                            <span>{skill.level}%</span>
+                          </div>
+                          <div className="relative h-2 rounded-full bg-gray-700 overflow-hidden">
+                            <div
+                              className={`${skill.color} absolute top-0 left-0 h-2 rounded-full ${
+                                barInView ? "animate-fill-bar-loop" : "w-0"
+                              }`}
+                              style={{ "--fill-level": `${skill.level}%` } as React.CSSProperties}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* Additional Skills */}
-        <Card className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50">
-          <CardContent className="p-8">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-3 mb-4">
-                <WrenchIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Additional Technologies
-                </h3>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300">
-                Other technologies and tools I work with regularly
-              </p>
+        <Card className="bg-white/10 dark:bg-gray-900/30 backdrop-blur-md border border-gray-700 shadow-lg mt-14 max-w-4xl mx-auto">
+          <CardContent className="p-8 text-center">
+            <div className="inline-flex items-center gap-4 mb-4 justify-center text-white">
+              <WrenchIcon className="w-7 h-7 text-cyan-400" />
+              <h3 className="text-3xl font-semibold">Additional Technologies</h3>
             </div>
-            
-            <div className="flex flex-wrap gap-3 justify-center">
-              {additionalSkills.map((skill, index) => (
+            <p className="text-gray-400 mb-8">
+              Other tools and technologies I use regularly
+            </p>
+            <div className="flex flex-wrap justify-center gap-5">
+              {additionalSkills.map((skill, idx) => (
                 <Badge
-                  key={index}
+                  key={idx}
                   variant="secondary"
-                  className="px-4 py-2 text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors cursor-pointer"
+                  className="cursor-pointer px-5 py-2 text-lg font-semibold bg-gray-800 hover:bg-cyan-600 dark:hover:bg-cyan-500/70 transition-colors rounded-full"
                 >
                   {skill}
                 </Badge>
@@ -124,6 +174,45 @@ export const Skills = (): JSX.Element => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Animation CSS */}
+      <style>{`
+        @keyframes fillBarLoop {
+          0% {
+            width: 0%;
+          }
+          50% {
+            width: var(--fill-level);
+          }
+          100% {
+            width: 0%;
+          }
+        }
+
+        .animate-fill-bar-loop {
+          animation-name: fillBarLoop;
+          animation-duration: 6s;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+          animation-fill-mode: forwards;
+        }
+
+        @keyframes sparkleMove {
+        0%   { transform: translateX(0); opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 1; }
+        100% { transform: translateX(var(--sparkle-distance)); opacity: 0; }
+      }
+
+      .animate-sparkle {
+        animation-name: sparkleMove;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+      }
+
+      `}</style>
     </section>
   );
 };

@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Github, Twitter, Send, MapPin, Calendar } from "lucide-react";
+import { Mail, Linkedin, Github, Twitter, Send } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 export const ModernContact = (): JSX.Element => {
+  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    project: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -18,13 +20,27 @@ export const ModernContact = (): JSX.Element => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
-    
-    alert('Thank you for your message! I\'ll get back to you soon.');
+    try {
+      if (!form.current) {
+        throw new Error('Form reference is null');
+      }
+
+      const result = await emailjs.sendForm(
+        'service_r1m5amt',
+        'template_dhgiega',
+        form.current,
+        { publicKey: 'rEKvRon_ZbNQEJ5ql' }
+      );
+      
+      console.log('EmailJS Success:', result);
+      setFormData({ name: '', email: '', project: '' });
+      alert('✅ Thank you for your message! I\'ll get back to you soon.');
+    } catch (error: any) {
+      console.error('EmailJS Error:', error);
+      alert('❌ Failed to send message. Please try contacting me directly via email or WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,25 +53,25 @@ export const ModernContact = (): JSX.Element => {
   const socialLinks = [
     {
       icon: <Linkedin className="w-5 h-5" />,
-      href: "https://linkedin.com/in/johnportfolio",
+      href: "https://www.linkedin.com/in/pankaj-mehra-250810279",
       label: "LinkedIn",
       color: "hover:text-blue-600"
     },
     {
       icon: <Github className="w-5 h-5" />,
-      href: "https://github.com/johnportfolio",
+      href: "https://github.com/mehrap673",
       label: "GitHub",
       color: "hover:text-gray-800 dark:hover:text-gray-200"
     },
     {
       icon: <Twitter className="w-5 h-5" />,
-      href: "https://twitter.com/johnportfolio",
+      href: "https://twitter.com/Ipankajmehra",
       label: "Twitter",
       color: "hover:text-blue-400"
     },
     {
       icon: <Mail className="w-5 h-5" />,
-      href: "mailto:john@johnportfolio.dev",
+      href: "mailto:mehrap673@gmail.com",
       label: "Email",
       color: "hover:text-red-500"
     }
@@ -87,7 +103,6 @@ export const ModernContact = (): JSX.Element => {
                   </p>
                 </div>
 
-
                 {/* Social Links */}
                 <div>
                   <h4 className="font-semibold mb-4">Connect with me</h4>
@@ -110,10 +125,10 @@ export const ModernContact = (): JSX.Element => {
 
               {/* Right Section - Contact Form */}
               <div className="lg:pl-8 my-auto">
-                <div className=" top-8">
-                  <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+                <div className="top-8">
+                  <h3 className="text-2xl font-semibold mb-6">Write me your project</h3>
                   
-                  <div onSubmit={handleSubmit} className="space-y-6">
+                  <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">
                         Name *
@@ -125,7 +140,7 @@ export const ModernContact = (): JSX.Element => {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Your full name"
+                        placeholder="Write your name"
                         className="glass-card border-0 bg-white/10 backdrop-blur focus:bg-white/20 transition-colors border border-white/20 rounded-lg"
                       />
                     </div>
@@ -141,31 +156,30 @@ export const ModernContact = (): JSX.Element => {
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="your.email@example.com"
+                        placeholder="Insert your email"
                         className="glass-card border-0 bg-white/10 backdrop-blur focus:bg-white/20 transition-colors border border-white/20 rounded-lg"
                       />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Message *
+                      <label htmlFor="project" className="block text-sm font-medium mb-2">
+                        Project *
                       </label>
                       <Textarea
-                        id="message"
-                        name="message"
+                        id="project"
+                        name="project"
                         required
-                        value={formData.message}
+                        value={formData.project}
                         onChange={handleInputChange}
-                        placeholder="Tell me about your project or idea..."
+                        placeholder="Write your project"
                         rows={6}
                         className="glass-card border-0 bg-white/10 backdrop-blur focus:bg-white/20 transition-colors resize-none border border-white/20 rounded-lg"
                       />
                     </div>
                     
                     <Button
-                      type="button"
+                      type="submit"
                       disabled={isSubmitting}
-                      onClick={handleSubmit}
                       className="w-full bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-700 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
@@ -180,7 +194,7 @@ export const ModernContact = (): JSX.Element => {
                         </>
                       )}
                     </Button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
