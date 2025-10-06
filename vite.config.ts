@@ -3,25 +3,19 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  // This is the CRUCIAL line for GitHub Pages deployment
-  base: '/Pankaj-Portfolio/',
-
+  base: '/Pankaj-Portfolio/',  // MUST match your repo name exactly
   plugins: [react()],
-
-  // This tells Vite that your index.html and main source files are in the 'client' folder
-  root: path.resolve(__dirname, 'client'),
-
+  root: path.resolve(__dirname, 'client'),  // frontend folder
   resolve: {
-    // This allows you to use imports like `import Component from '@/components/...'`
     alias: {
       '@': path.resolve(__dirname, 'client', 'src'),
     },
   },
-
   build: {
-    // This ensures the build output goes to a 'dist' folder in the project root,
-    // which is what the GitHub deployment action expects.
-    outDir: path.resolve(__dirname, 'dist'),
+    outDir: path.resolve(__dirname, 'dist'),  // build at root/dist
     emptyOutDir: true,
+    rollupOptions: {
+      input: path.resolve(__dirname, 'client', 'index.html'),  // explicitly use client/index.html
+    },
   },
 })
