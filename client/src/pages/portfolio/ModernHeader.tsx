@@ -30,11 +30,12 @@ export const ModernHeader = (): JSX.Element => {
 
   const navigationItems = [
     { label: "Home", action: scrollToTop },
+    { label: "About", action: () => scrollToSection('about') },
     { label: "Projects", action: () => scrollToSection('projects') },
     { label: "Education", action: () => scrollToSection('education') },
     { label : "Skills", action: () => scrollToSection('skills') },
+    { label : "LeetCode", action: () => scrollToSection('leetcode') },
     { label: "Certificates", action: () => scrollToSection('certificates') },
-    { label: "About", action: () => scrollToSection('about') },
     { label: "Contact", action: () => scrollToSection('contact') }
   ];
 

@@ -9,11 +9,14 @@ export const Footer = (): JSX.Element => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
+    { name: "Home", href: "#" },
     { name: "About", href: "#about" },
-    { name: "Education", href: "#education" },
     { name: "Projects", href: "#projects" },
+    { name: "Education", href: "#education" },
     { name: "Skills", href: "#skills" },
-    { name: "Certificates", href: "#certificates" }
+    { name: "LeetCode", href: "#leetcode" },
+    { name: "Certificates", href: "#certificates" },
+    { name: "Contact", href: "#contact" }
   ];
 
   const scrollToTop = () => {
