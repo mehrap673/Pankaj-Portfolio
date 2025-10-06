@@ -135,10 +135,11 @@ export const Skills = (): JSX.Element => {
                           </div>
                           <div className="relative h-2 rounded-full bg-gray-700 overflow-hidden">
                             <div
-                              className={`${skill.color} absolute top-0 left-0 h-2 rounded-full ${
-                                barInView ? "animate-fill-bar-loop" : "w-0"
-                              }`}
-                              style={{ "--fill-level": `${skill.level}%` } as React.CSSProperties}
+                              className={`${skill.color} h-2 rounded-full transition-all duration-1000 ease-out`}
+                              style={{ 
+                                width: barInView ? `${skill.level}%` : '0%',
+                                transitionDelay: `${idx * 150}ms`
+                              }}
                             />
                           </div>
                         </div>
@@ -174,45 +175,6 @@ export const Skills = (): JSX.Element => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Animation CSS */}
-      <style>{`
-        @keyframes fillBarLoop {
-          0% {
-            width: 0%;
-          }
-          50% {
-            width: var(--fill-level);
-          }
-          100% {
-            width: 0%;
-          }
-        }
-
-        .animate-fill-bar-loop {
-          animation-name: fillBarLoop;
-          animation-duration: 6s;
-          animation-iteration-count: infinite;
-          animation-timing-function: ease-in-out;
-          animation-fill-mode: forwards;
-        }
-
-        @keyframes sparkleMove {
-        0%   { transform: translateX(0); opacity: 0; }
-        10%  { opacity: 1; }
-        90%  { opacity: 1; }
-        100% { transform: translateX(var(--sparkle-distance)); opacity: 0; }
-      }
-
-      .animate-sparkle {
-        animation-name: sparkleMove;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-      }
-
-      `}</style>
     </section>
   );
 };

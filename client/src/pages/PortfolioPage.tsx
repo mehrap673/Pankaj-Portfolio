@@ -10,6 +10,7 @@ import { Certificates } from "./portfolio/Certificates";
 import { Achievements } from "./portfolio/Achievements";
 import { About } from "./portfolio/About";
 import FatLines from "./portfolio/FatLines";
+import { LeetCode } from "./portfolio/LeetCode";
 
 export const PortfolioPage = (): JSX.Element => {
   return (
@@ -20,7 +21,7 @@ export const PortfolioPage = (): JSX.Element => {
       <ModernProjects />
       <Education />
       <Skills />
-      
+      <LeetCode />
       <Certificates />
       <ModernContact />
       <Footer />
