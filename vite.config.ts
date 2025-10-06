@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   // This is the CRUCIAL line for GitHub Pages deployment
-  // base: '/Pankaj-Portfolio/',
+  base: '/Pankaj-Portfolio/',
 
   plugins: [react()],
 

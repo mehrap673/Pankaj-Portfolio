@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
+  "homepage": "https://mehrap673.github.io/Pankaj-Portfolio/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "tsc"
+    "check": "tsc",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
