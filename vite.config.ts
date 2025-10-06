@@ -2,22 +2,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-const isGitHubPages = process.env.NODE_ENV === 'production'
-
 export default defineConfig({
-  base: isGitHubPages ? '/Pankaj-Portfolio/' : '/',  // GitHub vs local
+  base: '/',                  // always root for Vercel
   plugins: [react()],
-  root: path.resolve(__dirname, 'client'),           // frontend folder
+  root: path.resolve(__dirname, 'client'),  
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'client', 'src'),
     },
   },
   build: {
-    outDir: path.resolve(__dirname, 'dist'),         // root/dist
+    outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
     rollupOptions: {
-      input: path.resolve(__dirname, 'client', 'index.html'),  // explicit input
+      input: path.resolve(__dirname, 'client', 'index.html'),
     },
   },
 })
